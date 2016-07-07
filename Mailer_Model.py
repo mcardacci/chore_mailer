@@ -29,16 +29,12 @@ class Mailer(object):
         mail.sendmail(self.from_address,self.to_address,text)
         mail.close()
         
-mailer=Mailer(
-"Chore List",
-"marco.cardacci@gmail.com",
-"ticketechtest@gmail.com",
-"locationswithpendingfiles"
-)
+email_list=["marco.cardacci@gmail.com", "tomworger@gmail.com", "kyle.forbes@gmail.com"]
 
-mailer.send("""
-<!DOCTYPE html>
-<html>
+duty_sector={
+    "one": """
+    <!DOCTYPE html>
+    <html>
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">          
@@ -51,10 +47,67 @@ mailer.send("""
             <legend>
                 Have you done your Chores this Week?
             </legend>
-            <input type="checkbox" name="animal" value="Cat" />Cats <br />                         
-            <input type="checkbox" name="animal" value="Dog" />Dogs<br />                         
-            <input type="checkbox" name="animal" value="Bird" />Birds<br />                         
+            <input type="checkbox" class="list-item" name="animal" value="Cat" />Sweep the floor. <br /> 
+            <input type="checkbox" class="list-item" name="animal" value="Dog" />Swiffer the floor<br />
+            <input type="checkbox" class="list-item" name="animal" value="Bird" />Wipe down the counter top with cleaning product or soap if none is available.<br />
         </fieldset>
+        <!--<script src="strikethrough.js"></script>-->
     </body>
 </html>
-""")
+""",
+"two": """
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">          
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>Chore List</title>
+        <link rel="stylesheet" href="stylesheet.css" type="text/css">
+    </head>
+    <body>
+        <fieldset>
+            <legend>
+                Have you done your Chores this Week?
+            </legend>
+            <input type="checkbox" class="list-item" name="animal" value="Cat" />Sweep the floor. <br /> 
+            <input type="checkbox" class="list-item" name="animal" value="Dog" />Swiffer the floor<br />
+            <input type="checkbox" class="list-item" name="animal" value="Bird" />Wipe down the counter top with cleaning product or soap if none is available.<br />
+        </fieldset>
+        <!--<script src="strikethrough.js"></script>-->
+    </body>
+</html>
+""",
+"three":"""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">          
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>Chore List</title>
+        <link rel="stylesheet" href="stylesheet.css" type="text/css">
+    </head>
+    <body>
+        <fieldset>
+            <legend>
+                Have you done your Chores this Week?
+            </legend>
+            <input type="checkbox" class="list-item" name="animal" value="Cat" />Sweep the floor. <br /> 
+            <input type="checkbox" class="list-item" name="animal" value="Dog" />Swiffer the floor<br />
+            <input type="checkbox" class="list-item" name="animal" value="Bird" />Wipe down the counter top with cleaning product or soap if none is available.<br />
+        </fieldset>
+        <!--<script src="strikethrough.js"></script>-->
+    </body>
+</html>
+"""
+}
+
+mailer=Mailer(
+"Chore List",
+"marco.cardacci@gmail.com",
+"ticketechtest@gmail.com",
+"locationswithpendingfiles"
+)
+
+# mailer.send()
