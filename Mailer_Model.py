@@ -1,21 +1,22 @@
 import smtplib
 from email.MIMEMultipart import MIMEMultipart
 from email.MIMEText import MIMEText
+from cleaning_sectors import *
+import json
 
 class Mailer(object):
 
     def __init__(self, **args):
         self.subject=args.get('subject', None) 
-        self.to_address=args.get('to_address', None)
         self.mailing_list=args.get('mailing_list', None)
         self.from_address=args.get('from_address', None)
         self.password=args.get('password', None)
-        print args
+        self.sector=args.get('sector', "There is a problem with the HTML")
         
-    def send(self,content):
+    def send(self,to_address,content):
         msg=MIMEMultipart()
+        msg['To']=to_address
         msg['From']=self.from_address
-        msg['To']=self.to_address
         msg['Subject']=self.subject
         
         msg.attach(MIMEText(content,'html'))
@@ -25,24 +26,26 @@ class Mailer(object):
         mail.starttls()
         mail.login(self.from_address,self.password)
         text=msg.as_string()
-        mail.sendmail(self.from_address,self.to_address,text)
+        mail.sendmail(self.from_address, to_address,text)
         mail.close()
     
-    def format_content(self):
-        pass
-   
-    def send_to_all(self, mailing_list):
-        pass
+    def send_to_all(self):
+        mailing_list=self.mailing_list
+        sector=self.sector
+        for address in mailing_list:
+             self.send(address,sector.one())
 
-# -------------------------- TESTING ------------------------------
+# -------------------------- TESTING ----------------------
 
 mailer=Mailer(
-    subject="Chore List", 
+    subject="TEST Chore List", 
     password="locationswithpendingfiles",
-    to_address="marco.cardacci@gmail.com",
-    mailing_list=("marco.cardacci@gmail.com", "tomworger@gmail.com", "kyle.forbes@gmail.com"),
+#    mailing_list=("marco.cardacci@gmail.com", "tomworger@gmail.com", "kyle.forbes@gmail.com"),
+    mailing_list=("marco.cardacci@gmail.com", "kyle.forbes@gmail.com"),
     from_address="ticketechtest@gmail.com",
-    )
+    sector=Sector()
+)
 
-
-# mailer.send()
+p=json.load(open("pattern.json"))
+print p["pattern"]["cycle_int"]["m"]
+# mailer.send_to_all()
