@@ -1,0 +1,9 @@
+{
+    "pattern" : [{
+        "m": sector.one(),
+        "k": sector.two(),
+        "t": sector.three()
+    }],
+    "cycle_int": 0 
+        
+}
