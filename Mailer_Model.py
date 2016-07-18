@@ -7,10 +7,10 @@ import json
 class Mailer(object):
 
     def __init__(self, **args):
-        self.subject=args.get('subject', None) 
-        self.mailing_list=args.get('mailing_list', None)
-        self.from_address=args.get('from_address', None)
-        self.password=args.get('password', None)
+        self.subject=args.get('subject', "Default Subject") 
+        self.mailing_list=args.get('mailing_list', "email@email.com")
+        self.from_address=args.get('from_address', "email@amil.com")
+        self.password=args.get('password', "password")
         self.sector=args.get('sector', "There is a problem with the HTML")
         
     def send(self,to_address,content):
@@ -35,27 +35,26 @@ class Mailer(object):
         for address in mailing_list:
              self.send(address,sector.one())
 
+    def increment_cycle_int_from_file(self):
+        json_file=json.load(open("pattern.json"))
+        
+        if json_file["cycle_int"] >= 6:
+            json_file["cycle_int"]=0
+
+        json_file["cycle_int"]+=1
+        
+        with open("pattern.json", "w") as f:
+            json.dump(json_file, f)
 # -------------------------- TESTING ----------------------
 
 mailer=Mailer(
     subject="TEST Chore List", 
     password="locationswithpendingfiles",
-#    mailing_list=("marco.cardacci@gmail.com", "tomworger@gmail.com", "kyle.forbes@gmail.com"),
-    mailing_list=("marco.cardacci@gmail.com", "kyle.forbes@gmail.com"),
+    mailing_list=("marco.cardacci@gmail.com", "tomworger@gmail.com", "kyle.forbes@gmail.com"),
+#    mailing_list=("marco.cardacci@gmail.com", "kyle.forbes@gmail.com"),
     from_address="ticketechtest@gmail.com",
     sector=Sector()
 )
 
-p=json.load(open("pattern.json"))
-p["another"]+=1
-
-if p["another"] > 6:
-    p["another"]=0
-
-
-with open("pattern.json", "w") as f:
-    json.dump(p, f) 
-
-
-
+mailer.increment_cycle_int_from_file()
 # mailer.send_to_all()
