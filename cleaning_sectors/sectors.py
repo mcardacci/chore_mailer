@@ -1,4 +1,11 @@
 class Sector():
+    def pick_sector_from_int(self, number):
+        if number == 1:
+            return self.one()
+        elif number == 2:
+            return self.two()
+        return self.three()
+        
     def one(self):
         return """
         <!DOCTYPE html>
