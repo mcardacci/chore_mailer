@@ -47,5 +47,15 @@ mailer=Mailer(
 )
 
 p=json.load(open("pattern.json"))
-print p["pattern"]["cycle_int"]["m"]
+p["another"]+=1
+
+if p["another"] > 6:
+    p["another"]=0
+
+
+with open("pattern.json", "w") as f:
+    json.dump(p, f) 
+
+
+
 # mailer.send_to_all()
