@@ -30,11 +30,16 @@ class Mailer(object):
         mail.close()
     
     def send_to_all(self):
+        sector_dict=self.pick_sector_dict()
         mailing_list=self.mailing_list
         sector=self.sector
-        for address in mailing_list:
-             self.send(address,sector.one())
-
+        
+        for name_initial, sector_int in sector_dict.items():
+            for address in mailing_list:
+                if address.startswith(name_initial):
+                    self.send(address, sector.pick_sector_from_int(sector_int)) 
+        
+         
     def increment_cycle_int_from_file(self):
         json_file=json.load(open("pattern.json"))
         
@@ -45,16 +50,23 @@ class Mailer(object):
         
         with open("pattern.json", "w") as f:
             json.dump(json_file, f)
+
+    def pick_sector_dict(self):
+        pattern_file=json.load(open("pattern.json"))
+        return pattern_file["pattern"][pattern_file["cycle_int"]]
+
+           
+
 # -------------------------- TESTING ----------------------
 
 mailer=Mailer(
     subject="TEST Chore List", 
     password="locationswithpendingfiles",
     mailing_list=("marco.cardacci@gmail.com", "tomworger@gmail.com", "kyle.forbes@gmail.com"),
-#    mailing_list=("marco.cardacci@gmail.com", "kyle.forbes@gmail.com"),
     from_address="ticketechtest@gmail.com",
     sector=Sector()
 )
 
+# mailer.pick_sector_dict()
+mailer.send_to_all()
 mailer.increment_cycle_int_from_file()
-# mailer.send_to_all()
