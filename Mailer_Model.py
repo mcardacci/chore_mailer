@@ -3,6 +3,8 @@ from email.MIMEMultipart import MIMEMultipart
 from email.MIMEText import MIMEText
 from cleaning_sectors import *
 import json
+import datetime as DT
+from datetime import timedelta
 
 class Mailer(object):
 
@@ -57,16 +59,18 @@ class Mailer(object):
 
            
 
-# -------------------------- TESTING ----------------------
+# -------------------------- SCRIPT ----------------------
+# Date formatting 
+today = DT.date.today()
+
 
 mailer=Mailer(
-    subject="TEST Chore List", 
+    subject="Chore List Due Date: {:%m/%d/%Y}".format(today + timedelta(days=14)), 
     password="locationswithpendingfiles",
     mailing_list=("marco.cardacci@gmail.com", "tomworger@gmail.com", "kyle.forbes@gmail.com"),
     from_address="ticketechtest@gmail.com",
     sector=Sector()
 )
 
-# mailer.pick_sector_dict()
 mailer.send_to_all()
 mailer.increment_cycle_int_from_file()
