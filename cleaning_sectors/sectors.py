@@ -20,7 +20,7 @@ class Sector():
             <body>
                 <fieldset>
                     <legend>
-                        Have you done your Chores this Week?
+                        Have you done you cleaned the Kitchen this Week?
                     </legend>
                     <input type="checkbox" class="list-item"/>Sweep Floor including Laundry Room<br/>
                     <input type="checkbox" class="list-item"/>Swiffer Floor including Laundry Room<br/>
@@ -49,7 +49,7 @@ class Sector():
             <body>
                 <fieldset>
                     <legend>
-                        Have you done your Chores this Week?
+                        Have you cleaned the Bathroom this Week?
                     </legend>
                     <input type="checkbox" class="list-item"/>Wipe down faucet<br/>
                     <input type="checkbox" class="list-item"/>Wipe down sink<br/>
@@ -83,19 +83,14 @@ class Sector():
             <body>
                 <fieldset>
                     <legend>
-                        Have you done your Chores this Week?
+                        Have you cleaned the Living room this Week?
                     </legend>
                     <input type="checkbox" class="list-item"/>Dust Furniture, Crevices and wherever necessary<br/>
                     <input type="checkbox" class="list-item"/>Water Plants<br/>
-                    <input type="checkbox" class="list-item"/>Sweep Floor<br/>
-                    <input type="checkbox" class="list-item"/>Swiffer Floor<br/>
+                    <input type="checkbox" class="list-item"/>Sweep Floor (including hallway)<br/>
+                    <input type="checkbox" class="list-item"/>Swiffer Floor (including hallway)<br/>
                 </fieldset>
                 <!--<script src="strikethrough.js"></script>-->
             </body>
         </html>
         """
-# ----------------------------- TESTING ---------------------------------
-# sec = Sector()
-# print sec.one()
-# print sec.two()
-# print sec.three()
