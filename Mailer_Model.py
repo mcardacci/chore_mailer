@@ -58,9 +58,9 @@ class Mailer(object):
            
 
 # -------------------------- TESTING ----------------------
-
+#--------------------------------start here-------------
 mailer=Mailer(
-    subject="TEST Chore List", 
+    subject="Chore List Due Date: {0}".format(), 
     password="locationswithpendingfiles",
     mailing_list=("marco.cardacci@gmail.com", "tomworger@gmail.com", "kyle.forbes@gmail.com"),
     from_address="ticketechtest@gmail.com",
